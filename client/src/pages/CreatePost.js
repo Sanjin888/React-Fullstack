@@ -3,17 +3,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 function CreatePost() {
-
-  const initalValues= {
+  const initalValues = {
     title: "",
     postText: "",
-    username: ""
+    username: "",
   };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
     postText: Yup.string().required(),
-    username:Yup.string().min(3).max(15).required()
+    username: Yup.string().min(3).max(15).required(),
   });
 
   const onSubmit = (data) => {
@@ -21,21 +20,28 @@ function CreatePost() {
   };
   return (
     <div className="createPostPage">
-      <Formik initialValues={initalValues} onSubmit={onSubmit}> 
+      <Formik
+        initialValues={initalValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
         <Form className="formContainer">
           <label>Title:</label>
+          <ErrorMessage name="title" component="span"/>
           <Field
             id="inputCreatePost"
             name="title"
             placeholder="(Ex. Title...)"
           />
           <label>Post:</label>
+          <ErrorMessage name="postText" component="span"/>
           <Field
             id="inputCreatePost"
             name="postText"
             placeholder="(Ex. Post...)"
           />
           <label>Username:</label>
+          <ErrorMessage name="username" component="span"/>
           <Field
             id="inputCreatePost"
             name="username"
